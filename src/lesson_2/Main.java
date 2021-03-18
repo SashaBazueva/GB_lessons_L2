@@ -41,8 +41,7 @@ public class Main {
         } catch (ArrayIndexOutOfBoundsException exception) {
             throw new MyArraySizeException("Неправильный размер массива: размер массива меньше 4", exception);
         }
-        int sum = toInt(arrays);
-        return sum;
+        return toInt(arrays);
     }
 
     public static int toInt(String[][] arrays) {
