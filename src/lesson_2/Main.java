@@ -1,7 +1,6 @@
 package lesson_2;
 
-import lesson_2.exception.MyArrayDataException;
-import lesson_2.exception.MyArraySizeException;
+import lesson_2.exception.*;
 
 
 /**
@@ -23,7 +22,6 @@ public class Main {
                 {"2", "4", "6", "8"},
                 {"3", "6", "9", "12"},
                 {"4", "8", "12", "16"},
-
         };
 
         System.out.println(checkArrayAndSumResult(strings));
@@ -40,7 +38,7 @@ public class Main {
                 if (arrays[i].length > 4)
                     throw new MyArraySizeException("Неправильный размер массива: размер внутреннего массива больше 4");
             }
-        } catch (IndexOutOfBoundsException exception) {
+        } catch (ArrayIndexOutOfBoundsException exception) {
             throw new MyArraySizeException("Неправильный размер массива: размер массива меньше 4", exception);
         }
         int sum = toInt(arrays);
@@ -48,7 +46,7 @@ public class Main {
     }
 
     public static int toInt(String[][] arrays) {
-        try{
+        try {
             int sum = 0;
             for (int i = 0; i < arrays.length; i++) {
                 for (int j = 0; j < arrays[i].length; j++) {
@@ -56,7 +54,7 @@ public class Main {
                 }
             }
             return sum;
-        }catch(NumberFormatException exception){
+        } catch (NumberFormatException exception) {
             throw new MyArrayDataException("Проверьте заполнение массива: в массиве встретился набор букв", exception);
         }
     }
