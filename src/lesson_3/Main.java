@@ -1,6 +1,5 @@
 package lesson_3;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -17,25 +16,39 @@ import java.util.HashSet;
 
 public class Main {
     public static void main(String[] args) {
-        String[] strings = {"magic", "alphabet", "pen", "umbrella", "pen", "cookie", "snack", "pen", "magic", "bet"};
-        HashSet<String> collectionSet = new HashSet<>();
 
-        collectionSet.addAll(Arrays.asList(strings));
-        System.out.println(collectionSet.toString());
+        String[] strings = {"magic", "alphabet", "pen", "umbrella", "pen", "cookie", "snack", "pen", "magic", "bet", "pen", "alphabet", "pen", "alphabet", "sun"};
 
+        outputUniqueAndSameWords(strings);
 
-        for (int i = 0; i < strings.length; i++) {
-            byte count = 0;
-            String word = strings[i];
-            for (int j = 0; j < strings.length; j++) {
-                if (word.equals(strings[j])) {
+    }
+    public static void outputUniqueAndSameWords(String[] arrayOfStrings){
+        byte count;
+
+        String[] uniqueStrings = createUniqueStringsArray(arrayOfStrings);
+        System.out.print("[");
+        for (int i = 0; i < uniqueStrings.length-1; i++) {
+            System.out.print(uniqueStrings[i] + ", ");
+        }
+        System.out.println(uniqueStrings[uniqueStrings.length-1]+"]");
+
+        for (int i = 0; i < uniqueStrings.length; i++){
+            count = 0;
+            for (int j = 0; j < arrayOfStrings.length; j++) {
+                if (uniqueStrings[i].equals(arrayOfStrings[j])){
                     count++;
                 }
-
             }
-            if (count != 1) {
-                System.out.printf("Слово «%s» встретилось %d раз%n", word, count);
-            }
+            if (count>1) System.out.printf("Слово «%s» встретилось %d раз%n", uniqueStrings[i], count);
         }
+    }
+
+    public static String[] createUniqueStringsArray(String[] arrayOfStrings){
+        HashSet<String> collectionSet = new HashSet<>();
+
+        collectionSet.addAll(Arrays.asList(arrayOfStrings));
+
+        String[] uniqueStrings = collectionSet.toArray(new String[0]);
+        return uniqueStrings;
     }
 }
