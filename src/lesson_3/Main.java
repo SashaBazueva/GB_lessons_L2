@@ -22,28 +22,34 @@ public class Main {
         outputUniqueAndSameWords(strings);
 
     }
-    public static void outputUniqueAndSameWords(String[] arrayOfStrings){
+
+    public static void outputUniqueAndSameWords(String[] arrayOfStrings) {
         byte count;
 
         String[] uniqueStrings = createUniqueStringsArray(arrayOfStrings);
-        System.out.print("[");
-        for (int i = 0; i < uniqueStrings.length-1; i++) {
-            System.out.print(uniqueStrings[i] + ", ");
-        }
-        System.out.println(uniqueStrings[uniqueStrings.length-1]+"]");
 
-        for (int i = 0; i < uniqueStrings.length; i++){
+        System.out.print("[");
+
+        for (int i = 0; i < uniqueStrings.length; i++) {
             count = 0;
             for (int j = 0; j < arrayOfStrings.length; j++) {
-                if (uniqueStrings[i].equals(arrayOfStrings[j])){
+                if (uniqueStrings[i].equals(arrayOfStrings[j])) {
                     count++;
                 }
             }
-            if (count>1) System.out.printf("Слово «%s» встретилось %d раз%n", uniqueStrings[i], count);
+
+            if (i == uniqueStrings.length - 1) {
+                if (count > 1) System.out.printf("%s(%d)", uniqueStrings[i], count);
+                else System.out.printf("%s", uniqueStrings[i]);
+            }else{
+                if (count > 1) System.out.printf("%s(%d), ", uniqueStrings[i], count);
+                else System.out.printf("%s, ", uniqueStrings[i]);
+            }
         }
+        System.out.print("]");
     }
 
-    public static String[] createUniqueStringsArray(String[] arrayOfStrings){
+    public static String[] createUniqueStringsArray(String[] arrayOfStrings) {
         HashSet<String> collectionSet = new HashSet<>();
 
         collectionSet.addAll(Arrays.asList(arrayOfStrings));
