@@ -1,5 +1,6 @@
 package lesson_3;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -31,6 +32,9 @@ public class Main {
                     count++;
                 }
 
+            }
+            if (count != 1) {
+                System.out.printf("Слово «%s» встретилось %d раз%n", word, count);
             }
         }
     }
