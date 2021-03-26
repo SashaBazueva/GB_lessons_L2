@@ -1,11 +1,5 @@
 package lesson_3;
 
-/*
-        2. Написать простой класс ТелефонныйСправочник, который хранит в себе список фамилий и телефонных номеров.
-         В этот телефонный справочник с помощью метода add() можно добавлять записи. С помощью метода get() искать
-         номер телефона по фамилии. Следует учесть, что под одной фамилией может быть несколько телефонов
-         (в случае однофамильцев), тогда при запросе такой фамилии должны выводиться все телефоны.
- */
 public class Task2 {
     public static void main(String[] args) {
 
@@ -13,7 +7,10 @@ public class Task2 {
         phoneBook.add("Brown", "+7892341");
         phoneBook.add("Brown", "9033425");
         phoneBook.add("Kitty", "5464345");
-        phoneBook.printPhoneBook();
 
+        phoneBook.print();
+
+        System.out.println(phoneBook.get("Brown"));
+        System.out.println(phoneBook.get("Kitty"));
     }
 }
