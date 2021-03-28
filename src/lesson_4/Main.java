@@ -4,13 +4,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class Main {
     public static void main(String[] args) {
-        Set<String> setForTask2 = Set.of("one", "tree", "cat", "mushroom");
-
         doTask1();
-        doTask2(setForTask2, s -> System.out.println(s));
+        doTask2();
+        doTask3();
     }
 
     public static void doTask1() {
@@ -19,11 +19,24 @@ public class Main {
         System.out.println();
     }
 
-    public static void doTask2(Set<String> set, Consumer<String> consumer) {
+    public static void doTask2(){
+        Set<String> setForTask2 = Set.of("one", "tree", "cat", "mushroom");
+        forItem(setForTask2, s -> System.out.println(s));
+    }
+
+    public static void doTask3(){
+        int number = 10;
+        System.out.printf("doubling %d = %d", number, doubleUp(number, () -> 2));
+    }
+
+    public static int doubleUp(int integer, Supplier<Integer> supplier){
+        return integer* supplier.get();
+    }
+
+    public static void forItem(Set<String> set, Consumer<String> consumer) {
         Iterator<String> it = set.iterator();
         while (it.hasNext()) {
             consumer.accept(it.next());
         }
     }
-    
 }
