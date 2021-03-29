@@ -1,8 +1,6 @@
 package lesson_4;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -38,5 +36,11 @@ public class Main {
         while (it.hasNext()) {
             consumer.accept(it.next());
         }
+    }
+
+    public static void findAllChars(String target, char toFind){
+        char[] ch = target.toCharArray();
+        ArrayList<Character> arrayList = new ArrayList<Character>(Arrays.asList());
+
     }
 }
