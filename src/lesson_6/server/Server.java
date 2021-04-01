@@ -35,7 +35,7 @@ public class Server {
                         receive = "Client: " + input.readUTF();
                         System.out.println(receive);
                     } catch (IOException e) {
-                        System.out.println("Client is offline...Connection was stopped.");
+                        System.out.println("Client is offline...Connection was stopped.\nTwice press \"Enter\"");
                         break;
 //                        e.printStackTrace();
                     }
@@ -48,7 +48,7 @@ public class Server {
                     send = scan.nextLine();
                     output.writeUTF(send);
                 } catch (EOFException | SocketException e) {
-                    System.out.println("Client is offline...Connection was stopped.");
+                    System.out.println("Program stopped");
                     break;
 //                    e.printStackTrace();
                 }

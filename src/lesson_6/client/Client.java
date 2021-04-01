@@ -28,7 +28,7 @@ public class Client {
                         receive = "Server: " + input.readUTF();
                         System.out.println(receive);
                     } catch (IOException e) {
-                        System.out.println("Server is not available for connection...Connection was stopped.");
+                        System.out.println("Server is not available for connection...Connection was stopped.\nTwice press \"Enter\"");
                         break;
 //                        e.printStackTrace();
                     }
@@ -41,7 +41,7 @@ public class Client {
                 output.writeUTF(send);
             }
         } catch (IOException e) {
-            System.out.println("Server is not available for connection...Connection was stopped.");
+            System.out.println("Program stopped");
 //            e.printStackTrace();
         }
     }
