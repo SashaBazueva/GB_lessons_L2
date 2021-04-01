@@ -17,19 +17,37 @@ public class Server {
             Socket client = server.accept();
             System.out.println("Server and client are connected successfully");
 
-            DataInputStream input = new DataInputStream(client.getInputStream());
             DataOutputStream output = new DataOutputStream(client.getOutputStream());
 
-            String receive, send;
+            String send;
             Scanner scan = new Scanner(System.in);
+
+            Thread read = new Thread(() -> {
+                String receive;
+                DataInputStream input = null;
+                try {
+                    input = new DataInputStream(client.getInputStream());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                while (true) {
+                    try {
+                        receive = "Client: " + input.readUTF();
+                        System.out.println(receive);
+                    } catch (IOException e) {
+                        System.out.println("Client is offline...Connection was stopped.");
+                        break;
+//                        e.printStackTrace();
+                    }
+                }
+            });
+            read.start();
+
             while (true) {
-                try{
-                    receive = input.readUTF();
-                    System.out.println("Client: " + receive);
-                    System.out.print("You: ");
+                try {
                     send = scan.nextLine();
                     output.writeUTF(send);
-                }catch (EOFException | SocketException e){
+                } catch (EOFException | SocketException e) {
                     System.out.println("Client is offline...Connection was stopped.");
                     break;
 //                    e.printStackTrace();
