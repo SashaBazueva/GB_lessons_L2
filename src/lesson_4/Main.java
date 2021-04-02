@@ -1,16 +1,21 @@
 package lesson_4;
 
-import java.util.*;
+import lesson_4.chat.ChatWindow;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class Main {
     public static void main(String[] args) {
-        doTask1();
-        doTask2();
-        doTask3();
-        doTask4();
-        //ChatWindow chat = new ChatWindow();
+//        doTask1();
+//        doTask2();
+//        doTask3();
+//        doTask4();
+        new ChatWindow();
     }
 
     public static void doTask1() {
@@ -30,7 +35,7 @@ public class Main {
     }
 
     public static void doTask4() {
-        System.out.println(findAllChars("elephant", 'e'));
+        System.out.println(findAllChars("elephant", 'e').get());
     }
 
     public static int doubleUp(int integer, Supplier<Integer> supplier) {
@@ -44,19 +49,18 @@ public class Main {
         }
     }
 
-    public static String findAllChars(String target, char toFind) {
+    public static Optional<String> findAllChars(String target, char toFind) {
         char[] ch = target.toCharArray();
-        List<Character> chars = new ArrayList<>();
-        String result ="";
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < ch.length; i++) {
-            chars.add(ch[i]);
-        }
-        Iterator<Character> iterator = chars.iterator();
-        while (iterator.hasNext()) {
-            if (iterator.next() == toFind) {
-                result += toFind;
+            if (toFind == ch[i]) {
+                sb.append(ch[i]);
             }
         }
-        return result;
+        if (sb.length() != 0) {
+            return Optional.of(sb.toString());
+        } else {
+            return Optional.empty();
+        }
     }
 }
