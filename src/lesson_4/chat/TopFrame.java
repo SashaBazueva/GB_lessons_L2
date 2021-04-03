@@ -4,23 +4,23 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TopFrame {
-    private JTextField textField;
+    private JTextArea textArea;
     private JPanel top;
-    StringBuilder sb;
 
     public TopFrame() {
-        textField = new JTextField();
-        textField.setEditable(false);
+        textArea = new JTextArea();
+        textArea.setEditable(false);
         top = new JPanel();
         top.setLayout(new BorderLayout());
-        top.add(textField, BorderLayout.CENTER);
-    }
-
-    public JTextField getTextField() {
-        return textField;
+        top.add(textArea, BorderLayout.CENTER);
+        textArea.setText("Hello!\n Write your first message...");
     }
 
     public JPanel getTop() {
         return top;
+    }
+
+    public JTextArea getTextArea() {
+        return textArea;
     }
 }

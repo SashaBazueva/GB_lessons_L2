@@ -10,7 +10,7 @@ public class BottomFrame {
     private JPanel bottom;
     private JButton submit;
 
-    public BottomFrame() {
+    public BottomFrame(JTextArea topText) {
         text = new JTextField();
         bottom = new JPanel();
         submit = new JButton("Submit");
@@ -18,14 +18,14 @@ public class BottomFrame {
         bottom.add(text, BorderLayout.CENTER);
         bottom.add(submit, BorderLayout.EAST);
         submit.addActionListener(e -> {
-            System.out.println(text.getText());
+            topText.setText(topText.getText() + "\nYou: "+ text.getText());
             text.setText("");
         });
         text.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode()==KeyEvent.VK_ENTER){
-                    System.out.println(text.getText());
+                    topText.setText(topText.getText() + "\nYou: "+ text.getText());
                     text.setText("");
                 }
             }
