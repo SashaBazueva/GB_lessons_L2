@@ -2,6 +2,8 @@ package lesson_4.chat;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class BottomFrame {
     private JTextField text;
@@ -15,11 +17,22 @@ public class BottomFrame {
         bottom.setLayout(new BorderLayout());
         bottom.add(text, BorderLayout.CENTER);
         bottom.add(submit, BorderLayout.EAST);
-        submit.addActionListener(new ButtonActionListener(text));
+        submit.addActionListener(e -> {
+            System.out.println(text.getText());
+            text.setText("");
+        });
+        text.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode()==KeyEvent.VK_ENTER){
+                    System.out.println(text.getText());
+                    text.setText("");
+                }
+            }
+        });
     }
 
     public JPanel getBottom() {
         return bottom;
     }
-
 }

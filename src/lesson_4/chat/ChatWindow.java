@@ -16,6 +16,7 @@ public class ChatWindow extends JFrame {
 
         BottomFrame bottom = new BottomFrame();
         add(bottom.getBottom(), BorderLayout.SOUTH);
+
         setVisible(true);
     }
 }
