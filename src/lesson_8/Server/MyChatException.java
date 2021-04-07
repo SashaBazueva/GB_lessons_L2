@@ -1,4 +1,4 @@
-package lesson_7.Server;
+package lesson_8.Server;
 
 public class MyChatException extends RuntimeException {
     public MyChatException(String message) {

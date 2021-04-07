@@ -1,4 +1,4 @@
-package lesson_7.Client;
+package lesson_8.Client;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ChatClient {
-    public ChatClient() {
+public class ChatConnection {
+    public ChatConnection(String host, int port) {
         try {
-            Socket client = new Socket("127.0.0.1", 8080);
+            Socket client = new Socket(host, port);
             DataInputStream input = new DataInputStream(client.getInputStream());
             DataOutputStream output = new DataOutputStream(client.getOutputStream());
 
