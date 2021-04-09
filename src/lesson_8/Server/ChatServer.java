@@ -42,7 +42,7 @@ public class ChatServer {
         return authenticationService;
     }
 
-    public boolean isLogged(String name) {
+    public synchronized boolean isLogged(String name) {
         return logged.stream().filter(clientHandler -> clientHandler.getName().equals(name)).findFirst().isPresent();
     }
 }

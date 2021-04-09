@@ -10,7 +10,7 @@ public class ClientHandler {
     private final Socket client;
     private final DataInputStream input;
     private final DataOutputStream output;
-    private ChatServer cs;
+    private final ChatServer cs;
     private String name;
 
     public ClientHandler(Socket clientSocket, ChatServer chatServer) {
@@ -72,8 +72,9 @@ public class ClientHandler {
                         AuthenticationService.Entry credentials = mayBeCredentials.get();
                         if (!cs.isLogged(credentials.getName())) {
                             this.name = credentials.getName();
+                            sendMessage("You entered in chat!");
                             cs.broadcast(String.format("User [%s] is entered the chat", name));
-                            cs.sendMessageOnServer(String.format("User [%s] is entered the chat", name));
+                            cs.sendMessageOnServer(String.format("[%s] is entered the chat", name));
                             cs.subscribe(this);
                             break;
                         } else {
