@@ -1,8 +1,6 @@
 package lesson_8.Server;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.util.Optional;
 
@@ -49,9 +47,14 @@ public class ClientHandler {
     public void receiveMessage() {
         while (true) {
             try {
-                cs.broadcast(String.format("%s: %s", name, input.readUTF()));
+                String message = String.format("%s: %s", name, input.readUTF());
+                cs.broadcast(message);
             } catch (IOException e) {
-                throw new MyChatException("Error in receiving message", e);
+                cs.unsubscribe(this);
+                cs.broadcast(String.format("User [%s] left the chat", name));
+                cs.sendMessageOnServer(String.format("[%s] left the chat", name));
+                break;
+                //throw new MyChatException("Client is offline", e);
             }
         }
     }
@@ -73,6 +76,7 @@ public class ClientHandler {
                         if (!cs.isLogged(credentials.getName())) {
                             this.name = credentials.getName();
                             sendMessage("You entered in chat!");
+                            get100ChatMessages(cs.getFile());
                             cs.broadcast(String.format("User [%s] is entered the chat", name));
                             cs.sendMessageOnServer(String.format("[%s] is entered the chat", name));
                             cs.subscribe(this);
@@ -90,6 +94,17 @@ public class ClientHandler {
             } catch (IOException e) {
                 throw new MyChatException("Error happened during authentication");
             }
+        }
+    }
+
+    public void get100ChatMessages(File file) {
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null){
+                sendMessage(line);
+            }
+        } catch (IOException e) {
+            throw new MyChatException("File \"Chat Messages\" not exist", e);
         }
     }
 }
